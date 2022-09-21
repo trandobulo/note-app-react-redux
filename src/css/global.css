@@ -21,15 +21,6 @@ button {
   margin-bottom: 20px;
 }
 
-.action-icon {
-  padding: 0px 0px;
-  width: 30px;
-  height: 30px;
-  border: none;
-  background: none;
-  margin: 0px 3px;
-}
-
 .col_icon {
   display: flex;
   width: 5%;

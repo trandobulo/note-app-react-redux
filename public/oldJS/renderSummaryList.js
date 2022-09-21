@@ -4,7 +4,7 @@ function renderSummary(category, noteList) {
   const summaryContainerId = `${summaryItemName}-summary`;
 
   summaryItem.innerHTML = `
-  <div class="row_category" id=${summaryContainerId}>
+  <div class="summury" id=${summaryContainerId}>
   <div class="col_icon">
     <div class="row__category-icon">
       <img class="action-icon" src="./svg/${summaryItemName}.svg" />

@@ -100,10 +100,9 @@ class NoteList implements INoteList {
   }
 
   getCategories(): string[] {
-    let categories: string[];
-    categories = [];
+    const categories: string[] = [];
 
-    for (let note of this.notes) {
+    for (const note of this.notes) {
       if (!categories.includes(note.category)) {
         categories.push(note.category);
       }
