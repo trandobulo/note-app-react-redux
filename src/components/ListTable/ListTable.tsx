@@ -3,26 +3,23 @@ import { useDispatch } from "react-redux";
 import Note from "./Note/Note";
 import Title from "./Title/Title";
 import Summary from "./Summary/Summary";
-import { INoteObj } from "../../features/note/noteSlices";
-import { openClose } from "../../features/editNotePopUp/editNotePopUpSlice";
+import { INote } from "../../features/note/types";
+import { toggle } from "../../features/editNotePopUp/editNotePopUpSlice";
 import "./ListTable.css";
 
 function ListTable(props: {
-  notes: Array<INoteObj>;
+  notes: Array<INote>;
   list: "noteList" | "summaryList";
 }): JSX.Element {
   const dispatch = useDispatch();
 
-  function getCategoryArchiveNotes(
-    notes: INoteObj[],
-    category: string
-  ): INoteObj[] {
+  function getCategoryArchiveNotes(notes: INote[], category: string): INote[] {
     return notes.filter(
-      (note: INoteObj) => note.category === category && !note.active
+      (note: INote) => note.category === category && !note.active
     );
   }
 
-  function getCategories(notes: INoteObj[]): string[] {
+  function getCategories(notes: INote[]): string[] {
     const categories: string[] = [];
 
     for (const note of notes) {
@@ -66,7 +63,7 @@ function ListTable(props: {
         <div
           className="create-note-button-container"
           onClick={() => {
-            dispatch(openClose());
+            dispatch(toggle());
           }}
         >
           <button id="create-note-button">create note</button>

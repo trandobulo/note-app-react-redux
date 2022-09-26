@@ -1,21 +1,19 @@
 import React from "react";
 import {
-  INoteObj,
   archiveUnarchiveNote,
   deleteNote,
 } from "../../../features/note/noteSlices";
-import {
-  openClose,
-  openToEdit,
-} from "../../../features/editNotePopUp/editNotePopUpSlice";
+import { INote } from "../../../features/note/types";
+import { openToEdit } from "../../../features/editNotePopUp/editNotePopUpSlice";
 import Icon from "../../Icon/Icon";
 import { useDispatch } from "react-redux";
 import "./Note.css";
+import { INoteProps } from "./types";
 
-function Note(props: { noteObj: INoteObj }): JSX.Element {
+function Note(props: INoteProps): JSX.Element {
   const dispatch = useDispatch();
 
-  function parseDates(noteObj: INoteObj): string | [] {
+  function parseDates(noteObj: INote): string | [] {
     const dates: string[] | null = noteObj.content.match(
       /\b\d{1,2}[/.-]\d{1,2}[\\/.-]\d{4}\b/g
     );
@@ -43,8 +41,8 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
     }
   }
 
-  const noteTamplate = (noteObj: INoteObj) => {
-    const noteIcon = (noteObj: INoteObj) => {
+  const noteTemplate = (noteObj: INote) => {
+    const noteIcon = (noteObj: INote) => {
       return (
         <div className="col_icon">
           <div className="row__category-icon">
@@ -54,7 +52,7 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
       );
     };
 
-    const contentCols = (noteObj: INoteObj) => {
+    const contentCols = (noteObj: INote) => {
       return [
         noteObj.created,
         noteObj.category,
@@ -67,7 +65,7 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
       ));
     };
 
-    const actions = (noteObj: INoteObj) => {
+    const actions = (noteObj: INote) => {
       if (noteObj.active) {
         return (
           <div className="row__actions-container ">
@@ -122,7 +120,7 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
     );
   };
 
-  return noteTamplate(props.noteObj);
+  return noteTemplate(props.noteObj);
 }
 
 export default Note;

@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { INoteObj } from "../../features/note/noteSlices";
+import { INote } from "../../features/note/types";
+import { IPopUp, IPopUpState } from "./types";
 import { useDispatch } from "react-redux";
-import { openClose } from "../../features/editNotePopUp/editNotePopUpSlice";
+import { toggle } from "../../features/editNotePopUp/editNotePopUpSlice";
 import { addNote, editNote } from "../../features/note/noteSlices";
 import "./EditNotePopUp.css";
+import { store } from "../../app/store";
 
-function EditNotePopUp(props: {
-  active: boolean;
-  noteObj?: INoteObj;
-}): JSX.Element {
+function EditNotePopUp(props: IPopUp): JSX.Element {
   const dispatch = useDispatch();
 
-  const [state, setState] = useState<{
-    category: string;
-    content: string;
-  }>({
+  const [state, setState] = useState<IPopUpState>({
     category: "random thought",
     content: "",
   });
@@ -26,7 +22,7 @@ function EditNotePopUp(props: {
     });
   }, [props]);
 
-  function handleChangeCategory(e: React.SyntheticEvent<HTMLElement>) {
+  function handleChangeCategory(e: React.SyntheticEvent<HTMLSelectElement>) {
     setState({ ...state, category: (e.target as HTMLInputElement).value });
   }
 
@@ -35,31 +31,34 @@ function EditNotePopUp(props: {
   }
 
   function handleCancelBtn() {
-    dispatch(openClose());
+    dispatch(toggle());
+  }
+
+  function saveOrEdit(obj: INote | undefined) {
+    const date = new Date();
+    if (obj) {
+      dispatch(
+        editNote({
+          id: obj.id,
+          category: state.category,
+          content: state.content,
+        })
+      );
+    } else {
+      dispatch(
+        addNote({
+          category: state.category,
+          content: state.content,
+          date: date,
+          id: `${store.getState().notes.length}`,
+        })
+      );
+    }
+
+    dispatch(toggle());
   }
 
   function handleSaveBtn() {
-    function saveOrEdit(obj: INoteObj | undefined) {
-      if (obj) {
-        dispatch(
-          editNote({
-            id: obj.id,
-            category: state.category,
-            content: state.content,
-          })
-        );
-        dispatch(openClose());
-      } else {
-        dispatch(
-          addNote({
-            category: state.category,
-            content: state.content,
-          })
-        );
-        dispatch(openClose());
-      }
-    }
-
     try {
       if (state.content.length >= 3) {
         saveOrEdit(props.noteObj);

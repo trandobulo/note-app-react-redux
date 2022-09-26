@@ -1,19 +1,20 @@
 import React from "react";
-import { INoteObj, ISummary } from "../../../features/note/noteSlices";
+import { INote, ISummary } from "../../../features/note/types";
 import Icon from "../../Icon/Icon";
+import { ISummaryProps } from "./types";
 
 import "./Summary.css";
 
-function Summary(props: { category: string; notes: INoteObj[] }): JSX.Element {
+function Summary(props: ISummaryProps): JSX.Element {
   const summaryItemName = props.category.replace(/\s/g, "-");
   const summaryContainerId = `${summaryItemName}-summary`;
 
   function getTotalActiveArchiveNotes(
-    notes: INoteObj[],
+    notes: INote[],
     category: string
   ): ISummary {
     return notes.reduce(
-      function (total: { active: number; archived: number }, note) {
+      function (total: ISummary, note) {
         if (note.category === category) {
           if (note.active) {
             total.active++;

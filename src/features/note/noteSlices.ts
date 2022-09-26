@@ -1,19 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { INote, IDeleteNotePayload, IEditNotePayload } from "./types";
 
-export interface INoteObj {
-  category: string;
-  created: string;
-  content: string;
-  id: string;
-  active: boolean;
-}
-
-export interface ISummary {
-  active: number;
-  archived: number;
-}
-
-const initialState: INoteObj[] = [
+const initialState: INote[] = [
   {
     category: "random thought",
     created: "september 22, 2022",
@@ -77,8 +65,8 @@ const initialState: INoteObj[] = [
   },
 ];
 
-function getNoteIndex(notes: INoteObj[], id: string): number {
-  return notes.findIndex((note: INoteObj) => {
+function getNoteIndex(notes: INote[], id: string): number {
+  return notes.findIndex((note: INote) => {
     return note.id === id;
   });
 }
@@ -88,10 +76,15 @@ export const noteSlice = createSlice({
   initialState,
   reducers: {
     addNote: (
-      state: INoteObj[],
-      action: PayloadAction<{ category: string; content: string }>
+      state: INote[],
+      action: PayloadAction<{
+        category: string;
+        content: string;
+        date: Date;
+        id: string;
+      }>
     ) => {
-      const date = new Date();
+      const date = action.payload.date;
 
       const monthNames = [
         "january",
@@ -114,17 +107,14 @@ export const noteSlice = createSlice({
           monthNames[date.getMonth()]
         } ${date.getDate()}, ${date.getFullYear()}`,
         content: action.payload.content,
-        id: `${state.length}`,
+        id: action.payload.id,
         active: true,
       };
 
       state.push(noteObj);
     },
 
-    editNote: (
-      state: INoteObj[],
-      action: PayloadAction<{ id: string; category: string; content: string }>
-    ) => {
+    editNote: (state: INote[], action: PayloadAction<IEditNotePayload>) => {
       state[getNoteIndex(state, action.payload.id)] = {
         ...state[getNoteIndex(state, action.payload.id)],
         category: action.payload.category,
@@ -132,13 +122,13 @@ export const noteSlice = createSlice({
       };
     },
 
-    deleteNote: (state: INoteObj[], action: PayloadAction<{ id: string }>) => {
+    deleteNote: (state: INote[], action: PayloadAction<IDeleteNotePayload>) => {
       state.splice(getNoteIndex(state, action.payload.id), 1);
     },
 
     archiveUnarchiveNote: (
-      state: INoteObj[],
-      action: PayloadAction<{ id: string }>
+      state: INote[],
+      action: PayloadAction<IDeleteNotePayload>
     ) => {
       state[getNoteIndex(state, action.payload.id)].active =
         !state[getNoteIndex(state, action.payload.id)].active;
@@ -149,6 +139,6 @@ export const noteSlice = createSlice({
 export const { addNote, deleteNote, editNote, archiveUnarchiveNote } =
   noteSlice.actions;
 
-export const selectNotes = (state: { notes: INoteObj[] }) => state.notes;
+export const selectNotes = (state: { notes: INote[] }) => state.notes;
 
 export default noteSlice.reducer;
