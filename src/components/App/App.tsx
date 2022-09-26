@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectNotes } from "../ListTable/Note/noteSlices";
+import { selectNotes } from "../../features/note/noteSlices";
 import {
   selectPopUpState,
   selectEditObj,
-} from "../EditNotePopUp/editNotePopUpSlice";
+} from "../../features/editNotePopUp/editNotePopUpSlice";
 
 import EditNotePopUp from "../EditNotePopUp/EditNotePopUp";
 import ListTable from "../ListTable/ListTable";

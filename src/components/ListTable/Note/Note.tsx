@@ -1,6 +1,13 @@
 import React from "react";
-import { INoteObj, archiveUnarchiveNote, deleteNote } from "./noteSlices";
-import { openClose, openToEdit } from "../../EditNotePopUp/editNotePopUpSlice";
+import {
+  INoteObj,
+  archiveUnarchiveNote,
+  deleteNote,
+} from "../../../features/note/noteSlices";
+import {
+  openClose,
+  openToEdit,
+} from "../../../features/editNotePopUp/editNotePopUpSlice";
 import Icon from "../../Icon/Icon";
 import { useDispatch } from "react-redux";
 import "./Note.css";

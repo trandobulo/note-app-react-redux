@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import noteReducer from "../../components/ListTable/Note/noteSlices";
-import popUpReducer from "../../components/EditNotePopUp/editNotePopUpSlice";
+import noteReducer from "../features/note/noteSlices";
+import popUpReducer from "../features/editNotePopUp/editNotePopUpSlice";
 
 export const store = configureStore({
   reducer: {

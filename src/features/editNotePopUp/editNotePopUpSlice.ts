@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { INoteObj } from "../ListTable/Note/noteSlices";
+import { INoteObj } from "../note/noteSlices";
 
 export const popUpSlice = createSlice({
   name: "popUpReducer",

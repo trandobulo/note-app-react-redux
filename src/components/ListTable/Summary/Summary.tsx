@@ -1,5 +1,5 @@
 import React from "react";
-import { INoteObj, ISummary } from "../Note/noteSlices";
+import { INoteObj, ISummary } from "../../../features/note/noteSlices";
 import Icon from "../../Icon/Icon";
 
 import "./Summary.css";

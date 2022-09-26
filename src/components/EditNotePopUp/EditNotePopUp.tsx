@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { INoteObj } from "../ListTable/Note/noteSlices";
+import { INoteObj } from "../../features/note/noteSlices";
 import { useDispatch } from "react-redux";
-import { openClose } from "./editNotePopUpSlice";
-import { addNote, editNote } from "../ListTable/Note/noteSlices";
+import { openClose } from "../../features/editNotePopUp/editNotePopUpSlice";
+import { addNote, editNote } from "../../features/note/noteSlices";
 import "./EditNotePopUp.css";
 
 function EditNotePopUp(props: {

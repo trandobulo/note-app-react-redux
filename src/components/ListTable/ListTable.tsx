@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import Note from "./Note/Note";
 import Title from "./Title/Title";
 import Summary from "./Summary/Summary";
-import { INoteObj } from "./Note/noteSlices";
-import { openClose } from "../EditNotePopUp/editNotePopUpSlice";
+import { INoteObj } from "../../features/note/noteSlices";
+import { openClose } from "../../features/editNotePopUp/editNotePopUpSlice";
 import "./ListTable.css";
 
 function ListTable(props: {
