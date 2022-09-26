@@ -5,7 +5,7 @@ export const popUpSlice = createSlice({
   name: "popUpReducer",
   initialState: { active: false, noteObj: undefined },
   reducers: {
-    openClose: (state: { active: boolean; noteObj: INoteObj | undefined }) => {
+    openClose: (state: { active: boolean; noteObj: undefined }) => {
       state.active = !state.active;
       state.noteObj = undefined;
     },
@@ -24,12 +24,11 @@ export const popUpSlice = createSlice({
   },
 });
 
-export const selectPopUpState = (state: {
-  popUp: { active: boolean; noteObj: INoteObj | undefined };
-}) => state.popUp.active;
-export const selectEditObj = (state: {
-  popUp: { active: boolean; noteObj: INoteObj | undefined };
-}) => state.popUp.noteObj;
+export const selectPopUpState = (state: { popUp: { active: boolean } }) =>
+  state.popUp.active;
+
+export const selectEditObj = (state: { popUp: { noteObj: INoteObj } }) =>
+  state.popUp.noteObj;
 
 export const { openClose, openToEdit } = popUpSlice.actions;
 

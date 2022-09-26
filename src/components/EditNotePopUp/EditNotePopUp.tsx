@@ -24,7 +24,7 @@ function EditNotePopUp(props: {
       category: props.noteObj ? props.noteObj.category : "random thought",
       content: props.noteObj ? props.noteObj.content : "",
     });
-  }, [props.noteObj]);
+  }, [props]);
 
   function handleChangeCategory(e: React.SyntheticEvent<HTMLElement>) {
     setState({ ...state, category: (e.target as HTMLInputElement).value });
