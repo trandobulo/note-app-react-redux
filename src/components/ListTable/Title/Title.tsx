@@ -25,7 +25,7 @@ function Title(props: { list: "noteList" | "summaryList" }): JSX.Element {
   return (
     <div className="row_title">
       <div className="col_icon"></div>
-      <label className="col_title">note category</label>
+      <label className="col_title">notes category</label>
       <label className="col_title">active</label>
       <label className="col_title">archived</label>
     </div>

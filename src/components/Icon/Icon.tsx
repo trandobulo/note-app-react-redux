@@ -25,9 +25,7 @@ function Icon(props: { name: string; pointer?: boolean }): JSX.Element {
       {iconImg[props.name as keyof typeof iconImg]}
     </div>
   ) : (
-    <div className="action-icon">
-      {iconImg[props.name as keyof typeof iconImg]}
-    </div>
+    iconImg[props.name as keyof typeof iconImg]
   );
 }
 
