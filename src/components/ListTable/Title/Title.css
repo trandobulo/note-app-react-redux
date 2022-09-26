@@ -1,0 +1,11 @@
+.row_title {
+  height: 30px;
+  display: flex;
+  background-color: #6ea7e2;
+  padding: 5px 0px;
+  min-width: 800px;
+  border-radius: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}

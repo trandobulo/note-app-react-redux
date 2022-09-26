@@ -1,20 +1,37 @@
 import React from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Note from "./Note/Note";
 import Title from "./Title/Title";
 import Summary from "./Summary/Summary";
-import {
-  INoteObj,
-  getCategories,
-  getCategoryArchiveNotes,
-} from "./Note/noteSlices";
+import { INoteObj } from "./Note/noteSlices";
 import { openClose } from "../EditNotePopUp/editNotePopUpSlice";
+import "./ListTable.css";
 
 function ListTable(props: {
   notes: Array<INoteObj>;
   list: "noteList" | "summaryList";
 }): JSX.Element {
   const dispatch = useDispatch();
+
+  function getCategoryArchiveNotes(
+    notes: INoteObj[],
+    category: string
+  ): INoteObj[] {
+    return notes.filter(
+      (note: INoteObj) => note.category === category && !note.active
+    );
+  }
+
+  function getCategories(notes: INoteObj[]): string[] {
+    const categories: string[] = [];
+
+    for (const note of notes) {
+      if (!categories.includes(note.category)) {
+        categories.push(note.category);
+      }
+    }
+    return categories;
+  }
 
   const list = () => {
     if (props.list === "noteList") {
@@ -59,10 +76,4 @@ function ListTable(props: {
   );
 }
 
-function mapStateToProps(state: { notes: INoteObj[] }, props: any) {
-  const { notes } = state;
-  const list = props.list;
-  return { notes: notes, list: list };
-}
-
-export default connect(mapStateToProps)(ListTable);
+export default ListTable;

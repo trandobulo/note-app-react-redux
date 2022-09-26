@@ -1,15 +1,19 @@
 import React from "react";
 import Icon from "../../Icon/Icon";
+import "./Title.css";
 
 function Title(props: { list: "noteList" | "summaryList" }): JSX.Element {
   if (props.list === "noteList") {
     return (
       <div className="row_title">
         <div className="col_icon"></div>
-        <label className="col_title">created</label>
-        <label className="col_title">category</label>
-        <label className="col_title">content</label>
-        <label className="col_title">dates</label>
+        {["created", "category", "content", "dates"].map((el) => {
+          return (
+            <label className="col_title" key={el}>
+              {el}
+            </label>
+          );
+        })}
         <div className="row__actions-container">
           <div className="action-icon_not-active">
             <Icon name="archive-box" />
@@ -25,9 +29,13 @@ function Title(props: { list: "noteList" | "summaryList" }): JSX.Element {
   return (
     <div className="row_title">
       <div className="col_icon"></div>
-      <label className="col_title">notes category</label>
-      <label className="col_title">active</label>
-      <label className="col_title">archived</label>
+      {["notes category", "active", "archived"].map((el) => {
+        return (
+          <label className="col_title" key={el}>
+            {el}
+          </label>
+        );
+      })}
     </div>
   );
 }

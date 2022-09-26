@@ -42,12 +42,6 @@
   resize: none;
 }
 
-.create-note-button-container {
-  display: flex;
-  justify-content: flex-end;
-  margin: 10px 0px;
-}
-
 .create-note-pop-up__buttons-container {
   display: flex;
   justify-content: flex-end;
