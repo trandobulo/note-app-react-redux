@@ -80,32 +80,14 @@ export const noteSlice = createSlice({
       action: PayloadAction<{
         category: string;
         content: string;
-        date: Date;
+        date: string;
         id: string;
       }>
     ) => {
-      const date = action.payload.date;
-
-      const monthNames = [
-        "january",
-        "february",
-        "march",
-        "april",
-        "may",
-        "june",
-        "july",
-        "august",
-        "september",
-        "october",
-        "november",
-        "december",
-      ];
 
       const noteObj = {
         category: action.payload.category,
-        created: `${
-          monthNames[date.getMonth()]
-        } ${date.getDate()}, ${date.getFullYear()}`,
+        created: action.payload.date,
         content: action.payload.content,
         id: action.payload.id,
         active: true,

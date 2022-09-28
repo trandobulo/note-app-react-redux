@@ -35,7 +35,23 @@ function EditNotePopUp(props: IPopUp): JSX.Element {
   }
 
   function saveOrEdit(obj: INote | undefined) {
-    const date = new Date();
+    
+
+    const monthNames: string[] = [
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
+    ];
+
     if (obj) {
       dispatch(
         editNote({
@@ -45,12 +61,15 @@ function EditNotePopUp(props: IPopUp): JSX.Element {
         })
       );
     } else {
+      const date: Date = new Date();
       dispatch(
         addNote({
           category: state.category,
           content: state.content,
-          date: date,
-          id: `${store.getState().notes.length}`,
+          date: `${
+            monthNames[date.getMonth()]
+          } ${date.getDate()}, ${date.getFullYear()}`,
+          id: `${store.getState().notes.length}${Math.random()}`,
         })
       );
     }
