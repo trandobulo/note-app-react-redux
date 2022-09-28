@@ -1,15 +1,34 @@
 import React from "react";
-import { INoteList } from "../../../redux/NoteList";
+import { INote, ISummary } from "../../../features/note/types";
 import Icon from "../../Icon/Icon";
+import { ISummaryProps } from "./types";
 
 import "./Summary.css";
 
-function Summary(props: {
-  category: string;
-  noteList: INoteList;
-}): JSX.Element {
+function Summary(props: ISummaryProps): JSX.Element {
   const summaryItemName = props.category.replace(/\s/g, "-");
   const summaryContainerId = `${summaryItemName}-summary`;
+
+  function getTotalActiveArchiveNotes(
+    notes: INote[],
+    category: string
+  ): ISummary {
+    return notes.reduce(
+      function (total: ISummary, note) {
+        if (note.category === category) {
+          if (note.active) {
+            total.active++;
+            return total;
+          } else {
+            total.archived++;
+            return total;
+          }
+        }
+        return total;
+      },
+      { active: 0, archived: 0 }
+    );
+  }
 
   return (
     <>
@@ -21,10 +40,10 @@ function Summary(props: {
         </div>
         <label className="col_content">{props.category}</label>
         <label className="col_content" id="${summaryItemName}-active-total">
-          {props.noteList.getTotalActiveArchiveNotes(props.category).active}
+          {getTotalActiveArchiveNotes(props.notes, props.category).active}
         </label>
         <label className="col_content" id="${summaryItemName}-archive-total">
-          {props.noteList.getTotalActiveArchiveNotes(props.category).archived}
+          {getTotalActiveArchiveNotes(props.notes, props.category).archived}
         </label>
       </div>
       <div id={`${summaryItemName}-archive`}></div>

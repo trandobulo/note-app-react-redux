@@ -1,9 +1,19 @@
-import React, { ReactComponentElement } from "react";
-import { INoteObj } from "../../../redux/NoteList";
+import React from "react";
+import {
+  archiveUnarchiveNote,
+  deleteNote,
+} from "../../../features/note/noteSlices";
+import { INote } from "../../../features/note/types";
+import { openToEdit } from "../../../features/editNotePopUp/editNotePopUpSlice";
 import Icon from "../../Icon/Icon";
+import { useDispatch } from "react-redux";
+import "./Note.css";
+import { INoteProps } from "./types";
 
-function Note(props: { noteObj: INoteObj }): JSX.Element {
-  function parseDates(noteObj: INoteObj): string | [] {
+function Note(props: INoteProps): JSX.Element {
+  const dispatch = useDispatch();
+
+  function parseDates(noteObj: INote): string | [] {
     const dates: string[] | null = noteObj.content.match(
       /\b\d{1,2}[/.-]\d{1,2}[\\/.-]\d{4}\b/g
     );
@@ -14,8 +24,25 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
     return [];
   }
 
-  const noteTamplate = (noteObj: INoteObj) => {
-    const noteIcon = (noteObj: INoteObj) => {
+  function handleActionBtn(e: React.SyntheticEvent<HTMLButtonElement>) {
+    switch (e.currentTarget.dataset.id) {
+      case "archive-note-button":
+      case "recovery-note-button":
+        dispatch(archiveUnarchiveNote({ id: props.noteObj.id }));
+        break;
+      case "delete-note-button":
+        dispatch(deleteNote({ id: props.noteObj.id }));
+        break;
+      case "edit-note-button":
+        dispatch(openToEdit({ noteObj: props.noteObj }));
+
+        break;
+      default:
+    }
+  }
+
+  const noteTemplate = (noteObj: INote) => {
+    const noteIcon = (noteObj: INote) => {
       return (
         <div className="col_icon">
           <div className="row__category-icon">
@@ -25,7 +52,7 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
       );
     };
 
-    const contentCols = (noteObj: INoteObj) => {
+    const contentCols = (noteObj: INote) => {
       return [
         noteObj.created,
         noteObj.category,
@@ -38,7 +65,7 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
       ));
     };
 
-    const actions = (noteObj: INoteObj) => {
+    const actions = (noteObj: INote) => {
       if (noteObj.active) {
         return (
           <div className="row__actions-container ">
@@ -51,7 +78,12 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
               { name: "trash", id: "delete-note-button" },
             ].map((el) => {
               return (
-                <button className="action-icon" data-id={el.id} key={el.id}>
+                <button
+                  className="action-icon"
+                  data-id={el.id}
+                  key={el.id}
+                  onClick={handleActionBtn}
+                >
                   <Icon name={el.name} data-id={el.id} />
                 </button>
               );
@@ -66,7 +98,12 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
             { name: "recovery", id: "recovery-note-button" },
             { name: "trash", id: "delete-note-button" },
           ].map((el) => (
-            <button className="action-icon" data-id={el.id} key={el.id}>
+            <button
+              className="action-icon"
+              data-id={el.id}
+              key={el.id}
+              onClick={handleActionBtn}
+            >
               <Icon data-id={el.id} name={el.name} />
             </button>
           ))}
@@ -83,7 +120,7 @@ function Note(props: { noteObj: INoteObj }): JSX.Element {
     );
   };
 
-  return noteTamplate(props.noteObj);
+  return noteTemplate(props.noteObj);
 }
 
 export default Note;

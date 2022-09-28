@@ -16,7 +16,7 @@
   padding: 20px;
   margin: 10px 0px;
   border-radius: 5px;
-  background-color: #B0E0E6;
+  background-color: #b0e0e6;
   flex-direction: column;
   text-transform: capitalize;
 }
@@ -40,12 +40,6 @@
   height: 200px;
   margin: 10px 0px;
   resize: none;
-}
-
-.create-note-button-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
 }
 
 .create-note-pop-up__buttons-container {

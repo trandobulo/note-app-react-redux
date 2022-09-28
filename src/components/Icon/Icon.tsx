@@ -6,11 +6,12 @@ import { ReactComponent as ThoughtIcon } from "../../svg/random-thought.svg";
 import { ReactComponent as RecoveryIcon } from "../../svg/recovery.svg";
 import { ReactComponent as TaskIcon } from "../../svg/task.svg";
 import { ReactComponent as TrashIcon } from "../../svg/trash.svg";
+import { IconMap, IIconProps } from "./types";
 
 import "./Icon.css";
 
-function Icon(props: { name: string; pointer?: boolean }): JSX.Element {
-  const iconImg: object = {
+function Icon(props: IIconProps): JSX.Element {
+  const iconImg: IconMap = {
     "archive-box": <ArchiveIcon />,
     idea: <IdeaIcon />,
     pencil: <PencilIcon />,
@@ -25,9 +26,7 @@ function Icon(props: { name: string; pointer?: boolean }): JSX.Element {
       {iconImg[props.name as keyof typeof iconImg]}
     </div>
   ) : (
-    <div className="action-icon">
-      {iconImg[props.name as keyof typeof iconImg]}
-    </div>
+    iconImg[props.name as keyof typeof iconImg]
   );
 }
 
