@@ -8,8 +8,6 @@ import { ReactComponent as TaskIcon } from "../../svg/task.svg";
 import { ReactComponent as TrashIcon } from "../../svg/trash.svg";
 import { IconMap, IIconProps } from "./types";
 
-import "./Icon.css";
-
 function Icon(props: IIconProps): JSX.Element {
   const iconImg: IconMap = {
     "archive-box": <ArchiveIcon />,
@@ -22,7 +20,7 @@ function Icon(props: IIconProps): JSX.Element {
   };
 
   return props.pointer ? (
-    <div className="action-icon_not-active">
+    <div className="action-icon">
       {iconImg[props.name as keyof typeof iconImg]}
     </div>
   ) : (

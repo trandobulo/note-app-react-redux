@@ -16,4 +16,12 @@
   .col_title {
     @apply flex w-[20%] text-white font-bold capitalize pl-[10px];
   }
+
+  .action-icon {
+    @apply w-[30px] h-[30px] my-[3px] bg-transparent mx-[3px] cursor-pointer;
+  }
+
+  .action-icon_not-active {
+    @apply w-[30px] h-[30px] my-[3px] bg-transparent mx-[3px];
+  }
 }
