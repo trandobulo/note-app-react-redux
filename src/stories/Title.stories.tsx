@@ -5,14 +5,20 @@ import Title from "./Title";
 import "./Title.css";
 
 export default {
-  title: "Example/Button",
+  title: "List/Title",
   component: Title,
 } as ComponentMeta<typeof Title>;
 
 const Template: ComponentStory<typeof Title> = (args) => <Title {...args} />;
 
-export const NoteList = Template.bind({});
+export const NoteListTitle = Template.bind({});
 
-NoteList.args = {
+NoteListTitle.args = {
   list: "noteList",
+};
+
+export const SummaryListTitle = Template.bind({});
+
+SummaryListTitle.args = {
+  list: "summaryList",
 };
