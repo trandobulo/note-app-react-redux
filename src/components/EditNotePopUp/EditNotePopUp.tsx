@@ -4,7 +4,6 @@ import { IPopUp, IPopUpState } from "./types";
 import { useDispatch } from "react-redux";
 import { toggle } from "../../features/editNotePopUp/editNotePopUpSlice";
 import { addNote, editNote } from "../../features/note/noteSlices";
-import "./EditNotePopUp.css";
 import { store } from "../../app/store";
 
 function EditNotePopUp(props: IPopUp): JSX.Element {
@@ -35,8 +34,6 @@ function EditNotePopUp(props: IPopUp): JSX.Element {
   }
 
   function saveOrEdit(obj: INote | undefined) {
-    
-
     const monthNames: string[] = [
       "january",
       "february",
@@ -90,60 +87,38 @@ function EditNotePopUp(props: IPopUp): JSX.Element {
   }
 
   return props.active ? (
-    <div className="create-note-pop-up-overlayer">
-      <div className="create-note-pop-up">
-        <label
-          className="create-note-pop-up__selector-label"
-          htmlFor="select-category"
-        >
+    <div className="flex absolute top-0 w-full h-full justify-center items-center bg-slate-900/60">
+      <div className="flex flex-col bg-sky-300 w-[450px] h-[350px] p-[20px] capitalize rounded-md">
+        <label className="font-medium" htmlFor="select-category">
           choose category:
         </label>
         <select
-          className="create-note-pop-up__selector"
+          className="mt-[10px] capitalize"
           id="select-category"
           name="select-category"
           onChange={handleChangeCategory}
           value={state.category}
         >
-          <option
-            className="create-note-pop-up__selector__options"
-            value="random thought"
-          >
-            random thought
-          </option>
-          <option
-            className="create-note-pop-up__selector__options"
-            value="idea"
-          >
-            idea
-          </option>
-          <option
-            className="create-note-pop-up__selector__options"
-            value="task"
-          >
-            task
-          </option>
+          {["random thought", "idea", "task"].map((el) => {
+            return (
+              <option value={el} key={el}>
+                {el}
+              </option>
+            );
+          })}
         </select>
         <textarea
-          className="create-note-pop-up__note-input"
+          className="h-[200px] p-[5px] my-[10px] resize-none"
           id="note-input"
           autoFocus
           onChange={handleChangeContent}
           value={state.content}
         ></textarea>
-        <div className="create-note-pop-up__buttons-container">
-          <button
-            className="button"
-            id="save-note-button"
-            onClick={handleSaveBtn}
-          >
+        <div className="flex justify-between mt-[10px]">
+          <button id="save-note-button" onClick={handleSaveBtn}>
             {props.noteObj ? "edit note" : "save note"}
           </button>
-          <button
-            className="button"
-            id="cancel-note-button"
-            onClick={handleCancelBtn}
-          >
+          <button id="cancel-note-button" onClick={handleCancelBtn}>
             cancel
           </button>
         </div>

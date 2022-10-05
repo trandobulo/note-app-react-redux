@@ -5,7 +5,6 @@ import Title from "./Title/Title";
 import Summary from "./Summary/Summary";
 import { INote } from "../../features/note/types";
 import { toggle } from "../../features/editNotePopUp/editNotePopUpSlice";
-import "./ListTable.css";
 
 function ListTable(props: {
   notes: Array<INote>;
@@ -61,7 +60,7 @@ function ListTable(props: {
       {list()}
       {props.list === "noteList" && (
         <div
-          className="create-note-button-container"
+          className="flex justify-end py-[10px]"
           onClick={() => {
             dispatch(toggle());
           }}
