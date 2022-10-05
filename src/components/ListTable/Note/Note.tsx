@@ -7,7 +7,6 @@ import { INote } from "../../../features/note/types";
 import { openToEdit } from "../../../features/editNotePopUp/editNotePopUpSlice";
 import Icon from "../../Icon/Icon";
 import { useDispatch } from "react-redux";
-import "./Note.css";
 import { INoteProps } from "./types";
 
 function Note(props: INoteProps): JSX.Element {
@@ -44,8 +43,8 @@ function Note(props: INoteProps): JSX.Element {
   const noteTemplate = (noteObj: INote) => {
     const noteIcon = (noteObj: INote) => {
       return (
-        <div className="col_icon">
-          <div className="row__category-icon">
+        <div className="flex justify-center items-center min-w-[50px] w-[5%]">
+          <div className="flex justify-center items-center w-[40px] h-[40px] rounded-full bg-slate-200">
             <Icon name={noteObj.category.replace(/\s/g, "-")} />
           </div>
         </div>
@@ -68,7 +67,7 @@ function Note(props: INoteProps): JSX.Element {
     const actions = (noteObj: INote) => {
       if (noteObj.active) {
         return (
-          <div className="row__actions-container ">
+          <div className="flex justify-end w-[15%] pr-[20px] items-center">
             {[
               { name: "pencil", id: "edit-note-button" },
               {
@@ -93,7 +92,7 @@ function Note(props: INoteProps): JSX.Element {
       }
 
       return (
-        <div className="row__actions-container ">
+        <div className="flex justify-end w-[15%] pr-[20px] items-center">
           {[
             { name: "recovery", id: "recovery-note-button" },
             { name: "trash", id: "delete-note-button" },
@@ -112,7 +111,10 @@ function Note(props: INoteProps): JSX.Element {
     };
 
     return (
-      <div className="row" id={props.noteObj.id}>
+      <div
+        className="flex h-[55px] py-[10px] my-[10px] bg-white hover:bg-slate-100 border-solid border-b border-b-slate-100 hover:shadow-md hover:transition"
+        id={props.noteObj.id}
+      >
         {noteIcon(noteObj)}
         {contentCols(noteObj)}
         {actions(noteObj)}

@@ -1,66 +1,19 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  button {
+    @apply bg-sky-500 w-[150px] h-[30px] capitalize;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+@layer components {
+  .col_content {
+    @apply flex w-[20%] items-center truncate pl-[10px]  [&:nth-child(2)]:capitalize [&:nth-child(3)]:capitalize;
+  }
 
-main {
-  padding: 10px;
-  width: inherit;
-  min-width: 600px;
-}
-
-button {
-  text-transform: capitalize;
-  background-color: #6eb7cd;
-  border: none;
-  width: 150px;
-  height: 30px;
-}
-
-.note-list-container {
-  margin-bottom: 20px;
-}
-
-.col_icon {
-  display: flex;
-  width: 5%;
-  min-width: 50px;
-  justify-content: center;
-  align-items: center;
-}
-
-.col_title {
-  width: 20%;
-  display: flex;
-  text-transform: capitalize;
-  font-weight: 600;
-  color: #fff;
-  padding-left: 10px;
-}
-
-.col_content {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  margin: 0px;
-  cursor: pointer;
-  padding-left: 10px;
-}
-
-.col_content:nth-child(2) {
-  text-transform: capitalize;
-}
-
-.col_content:nth-child(3) {
-  text-transform: capitalize;
+  .col_title {
+    @apply flex w-[20%] text-white font-bold capitalize pl-[10px];
+  }
 }

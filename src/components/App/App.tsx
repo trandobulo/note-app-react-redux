@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <main>
+      <main className="min-w-[600px] px-[10px]">
         <ListTable notes={notes} list="noteList" />
         <ListTable notes={notes} list="summaryList" />
       </main>
