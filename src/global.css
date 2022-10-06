@@ -64,3 +64,11 @@ button {
 .col_content:nth-child(3) {
   text-transform: capitalize;
 }
+
+.row__actions-container {
+  display: flex;
+  width: 15%;
+  padding-right: 20px;
+  justify-content: flex-end;
+  align-items: center;
+}

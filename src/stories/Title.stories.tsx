@@ -1,8 +1,9 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Title from "./Title";
-import "./Title.css";
+import Title from "../components/ListTable/Title/Title";
+import "../components/ListTable/Title/Title.css";
+import "../global.css";
 
 export default {
   title: "List/Title",
