@@ -1,4 +1,13 @@
-# Getting Started with Create React App
+# Note app on React, with Redux & TypeScript.
+
+### Functionality:
+
+- posibility to add, edit, archive, delete or restore note
+- note automatically checking text for dates in format mm/dd/yyyy , mm.dd.yyy and else
+- there is also a statistic of active and archived notes in a lower table
+
+
+<hr/>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
